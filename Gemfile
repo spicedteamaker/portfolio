@@ -42,6 +42,13 @@ gem 'binding_of_caller'
 
 # let's play with divise authentication gem
 gem 'devise'
+# faker for fake data generation
+gem 'faker'
+gem 'image_processing'
+# pagination
+gem 'kaminari'
+gem 'font-awesome-rails'
+
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

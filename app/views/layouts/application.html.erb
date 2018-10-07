@@ -12,19 +12,36 @@
 
     <!-- Navbar -->
     <div class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <%= link_to "Index", posts_path, class: "navbar-brand" %>
-      <% if user_signed_in? %>
-        <%= link_to "Sign Out", destroy_user_session_path, method: :delete, class: "nav-link ml-auto btn btn-sm btn-secondary" %>
-      <% end %>
-      <% if !user_signed_in? %>
-        <%= link_to "Sign In", new_user_session_path, class: "nav-link ml-auto btn btn-sm btn-secondary" %>
-      <% end %>
+      <ul class="navbar-nav mr-auto">
+        <%= link_to "Index", posts_path, class: "navbar-brand" %>
+      </ul>
+      <ul class="navbar-nav ml-auto">
+        <% if user_signed_in? %>
+          <li class="nav-item">
+            <%= link_to "Create Post", new_post_path, class: "nav-link btn btn-sm btn-secondary" %>
+          </li>
+          &nbsp
+          <li class="nav-item">
+            <%= link_to "Sign Out", destroy_user_session_path(), method: :delete, class: "nav-link btn btn-sm btn-secondary" %>
+          </li>
+        <% end %>
+        <% if !user_signed_in? %>
+          <li class="nav-item">
+            <%= link_to "Sign In", new_user_session_path, class: "nav-link ml-auto btn btn-sm btn-secondary" %>
+          </li
+        <% end %>
+      </ul>
     </div>
   </head>
 
   <body>
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
+    <% if flash[:error] %>
+      <div class="alert alert-danger">
+        <%= flash[:error] %>
+      </div>
+    <% end %>
     <%= yield %>
   </body>
 </html>

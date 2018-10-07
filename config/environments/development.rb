@@ -61,4 +61,8 @@ Rails.application.configure do
   # Use an evented file watcher to asynchronously detect changes in source code,
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
+
+  # This is a workaround for the deadlocks acquired when seeding data with an image using ActiveStorage. Find the bug report here:https://github.com/rails/rails/issues/33500
+  # Read about inline and async job queuing here: https://blog.bigbinary.com/2016/03/29/rails-5-changed-default-active-job-adapter-to-async.html
+  config.active_job.queue_adapter = :inline
 end

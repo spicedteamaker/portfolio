@@ -1,2 +1,23 @@
-<h1>Posts#new</h1>
-<p>Find me in app/views/posts/new.html.erb</p>
+<div class="row">
+  <div class="col-sm-4">
+  </div>
+  <div class="col-sm-4">
+    <% if @post.errors.any? %>
+      <ul>
+      <% @post.errors.full_messages.each do |e| %>
+        <li class="text-danger"><%= e %></li>
+        <% end %>
+      </ul>
+    <% end %>
+    <h3> Writing new post...</h3>
+    <%= form_for @post, url: {action: "create"} do |f| %>
+    <%= f.text_field :title, class: "form-control", placeholder: "Title" %>
+    <br>
+    <%= f.text_area :body, rows: "15", class: "form-control rounded-20", placeholder: "Body..." %>
+    <br>
+    <%= f.file_field :main_picture %>
+
+    <%= f.submit :Post %>
+    <% end %>
+  </div>
+</div>
