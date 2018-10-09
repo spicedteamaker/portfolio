@@ -11,7 +11,17 @@ namespace 'db' do
             body: Faker::Lorem.paragraph(49)
         )
         p.main_picture.attach(io: File.open(Rails.root.join('storage/test.png')), filename: 'test.png', content_type: 'image/png')
-        p.save
+        randomTime = "#{rand(1990..2018)}-#{rand(1..12)}-#{rand(1..29)} #{rand(0..24)}:#{rand(0..59)}:#{rand(0..50)}"
+        p.created_at = randomTime
+        p.save!
+      end
+
+      rand(7..15).times do
+        p = PortfolioPost.create
+        rand(1..7).times do
+          p.pictures.attach(io: File.open(Rails.root.join('storage/test.png')), filename: 'test.png', content_type: 'image/png')
+        end
+        p.save!
       end
 
       # basic user for development, all first-time users should be basic

@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
   include ApplicationHelper
 
-  before_action :check_privilage, only: [:new, :create, :edit]
+  before_action :check_privilage, only: [:new, :create, :edit, :update, :destroy]
 
   def index
     @posts = Post.order(:created_at).reverse_order.page params[:page]
@@ -22,6 +22,24 @@ class PostsController < ApplicationController
   end
 
   def edit
+    @post = Post.find(params[:id])
+  end
+
+  def update
+    @post = Post.find(params[:id])
+    @post.update(post_params)
+    if @post.valid?
+      @post.save
+      redirect_to post_path(@post)
+    elsif !post.valid?
+      render edit_post_path
+    end
+  end
+
+  def destroy
+    @post = Post.find(params[:id])
+    @post.destroy
+    redirect_to root_path
   end
 
   def show
@@ -29,7 +47,11 @@ class PostsController < ApplicationController
   end
 
   def catalog
-
+    @posts = Post.order(:created_at).reverse_order
+    @month = nil
+    @year = nil
+    @colNum = 0
+    @colMax = @colNum + 4
   end
 
   def check_privilage

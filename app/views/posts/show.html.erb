@@ -1,4 +1,9 @@
 <div class="container text-center">
+  <% if !current_user.nil? %>
+    <% if current_user.role == "admin" || current_user.role == "operator" %>
+      <p> Not happy with this? <%= link_to "Edit...", edit_post_path(@post.id) %></p>
+    <% end %>
+  <% end %>
   <h3><%= @post.title %></h3>
   <%= image_tag @post.main_picture, class: "img-fluid" %>
   <hr>

@@ -1,0 +1,26 @@
+// Place all the styles related to the PortfolioPosts controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+/* Style the button and place it in the middle of the container/image */
+
+
+.container .delete {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  background-color: #555;
+  color: white;
+  font-size: 14px;
+  padding: 10px 10px;
+  border-radius: 15px;
+}
+
+.container .portfolio-image {
+  //max-height: 200px;
+  //max-width: 400px;
+  padding-bottom: 25px;
+}
+
+.container .portfolio-image:hover .delete {
+  display: block;
+}

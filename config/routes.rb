@@ -16,4 +16,6 @@ Rails.application.routes.draw do
 
   resources :posts
   get 'catalog', to: 'posts#catalog'
+  resources :portfolio_posts
+
 end

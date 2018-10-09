@@ -45,9 +45,11 @@ gem 'devise'
 # faker for fake data generation
 gem 'faker'
 gem 'image_processing'
+gem 'mini_magick'
 # pagination
 gem 'kaminari'
 gem 'font-awesome-rails'
+gem 'jquery-rails'
 
 
 group :development, :test do

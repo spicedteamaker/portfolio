@@ -1,0 +1,33 @@
+<% if user_signed_in? %>
+  <%= link_to "Upload some stuff", new_portfolio_post_path, class: "float-right btn btn-sm btn-secondary"  %>
+  <br>
+  <br>
+  <% if params[:edit] == "true" %>
+    <%= link_to "Stop Editing", portfolio_posts_path, class: "float-right btn btn-sm btn-secondary" %>
+  <% else %>
+    <%= link_to "Edit Mode", portfolio_posts_path(edit: true), class: "float-right btn btn-sm btn-secondary"  %>
+  <% end %>
+
+<% end %>
+<div class="row">
+  <div class="col-sm-2">
+  </div>
+  <div class="col-sm-8">
+    <div class="row">
+      <% @portfolioPosts.each do |p| %>
+        <% p.pictures.each do |m| %>
+          <div class="col-sm-3">
+            <div class="container">
+              <%= link_to (image_tag m.variant(resize: "300"), class: "portfolio-image img-fluid"), url_for(m) %>
+              <% if user_signed_in? && @editMode == true %>
+                <% if current_user.role == "operator" || current_user.role == "admin" %>
+                  <%= link_to "x", portfolio_post_path(id: m.id), method: "delete", data: { confirm: 'Are you sure?' }, class: "delete" %>
+                <% end %>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>

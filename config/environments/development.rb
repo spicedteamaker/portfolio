@@ -29,7 +29,7 @@ Rails.application.configure do
 
   # Store uploaded files on the local file system (see config/storage.yml for options)
   config.active_storage.service = :local
-
+  
   # Don't care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = false
 
@@ -65,4 +65,7 @@ Rails.application.configure do
   # This is a workaround for the deadlocks acquired when seeding data with an image using ActiveStorage. Find the bug report here:https://github.com/rails/rails/issues/33500
   # Read about inline and async job queuing here: https://blog.bigbinary.com/2016/03/29/rails-5-changed-default-active-job-adapter-to-async.html
   config.active_job.queue_adapter = :inline
+
+
+
 end
