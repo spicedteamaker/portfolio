@@ -11,10 +11,10 @@ class PortfolioPost < ApplicationRecord
     end
   end
   def validate_attachment_type
-    accepted = [".gif", ".png", ".jpg"]
+    accepted = [".gif", ".png", ".jpg", ".jpeg"]
     unless pictures.nil?
       pictures.each do |p|
-        extension = File.extname(p.filename.to_s)
+        extension = File.extname(p.filename.to_s).downcase
         unless accepted.include? extension
           errors.add(:portfolio_post, "only allows [.jpg, .gif, and .png] file types")
         end
