@@ -1,4 +1,12 @@
+<% if @portfolioPost.errors.any? %>
+  <ul>
+  <% @portfolioPost.errors.full_messages.each do |e| %>
+    <li class="text-danger"><%= e %></li>
+    <% end %>
+  </ul>
+<% end %>
 <%= form_for @portfolioPost, url: {action: "create"} do |f| %>
   <%= f.file_field :pictures, multiple: true %>
+  <%= f.hidden_field :title, value: "niggerdicks" %>
   <%= f.submit "Upload" %>
 <% end %>

@@ -1,33 +1,75 @@
-<% if user_signed_in? %>
-  <%= link_to "Upload some stuff", new_portfolio_post_path, class: "float-right btn btn-sm btn-secondary"  %>
-  <br>
-  <br>
-  <% if params[:edit] == "true" %>
-    <%= link_to "Stop Editing", portfolio_posts_path, class: "float-right btn btn-sm btn-secondary" %>
-  <% else %>
-    <%= link_to "Edit Mode", portfolio_posts_path(edit: true), class: "float-right btn btn-sm btn-secondary"  %>
-  <% end %>
-
-<% end %>
 <div class="row">
-  <div class="col-sm-2">
+  <div class="col-lg-2">
   </div>
-  <div class="col-sm-8">
+  <div class="col-lg-8">
     <div class="row">
-      <% @portfolioPosts.each do |p| %>
-        <% p.pictures.each do |m| %>
-          <div class="col-sm-3">
+      <% if @pictures.empty? %>
+        <h3> No pictures found on this page! </h3>
+        <h3><%= link_to "Back to top...", portfolio_posts_path(page: 1), style: "padding-left:50px" %></h3>
+      <% else %>
+        <% @pictures.each do |p| %>
+          <div class="col-sm-6 col-lg-6">
             <div class="container">
-              <%= link_to (image_tag m.variant(resize: "300"), class: "portfolio-image img-fluid"), url_for(m) %>
+              <%= link_to (image_tag p.variant(resize: "450x300"), class: "portfolio-image img-fluid"), url_for(p) %>
+              <div class="space">
+              </div>
               <% if user_signed_in? && @editMode == true %>
                 <% if current_user.role == "operator" || current_user.role == "admin" %>
-                  <%= link_to "x", portfolio_post_path(id: m.id), method: "delete", data: { confirm: 'Are you sure?' }, class: "delete" %>
+                  <%= link_to "x", portfolio_post_path(id: p.id, page: params[:page], pageTotal: @pictures.count-1), method: "delete", data: { confirm: 'Are you sure?' }, class: "delete" %>
                 <% end %>
               <% end %>
             </div>
           </div>
         <% end %>
       <% end %>
+      <div class="container">
+        <div class="navbar navbar-expand">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+              <% if !@onFirstPage && params[:page].to_i > 1 %>
+                <%= link_to fa_icon("arrow-left", class: "fa-3x", style: "color:grey"), portfolio_posts_path(page: params[:page].to_i - 1), class: "nav-link", style: "padding-right:20px" %>
+              <% else %>
+                <!-- blank space to just keep the nav in mid -->
+                <%= "" %>
+              <% end %>
+            </li>
+          </ul>
+          <ul class="navbar-nav ml-auto mr-auto">
+            <li class="page-navigation nav-item">
+              <% @pageNav.each do |n| %>
+                <% if n == params[:page].to_i %>
+                  <%= link_to "#{n}", portfolio_posts_path(page: n), class: "current-page"%>
+                <% else %>
+                  <%= link_to n, portfolio_posts_path(page: n), class: "page-links" %>
+                <% end %>
+              <% end %>
+            </li>
+          </ul>
+          <ul class="navbar-nav ml-auto">
+            <!-- Not sure why the right arrow is more towards the right, pad it to align with left arrow -->
+            <li class="nav-item">
+              <% if !@onLastPage %>
+                <%= link_to fa_icon("arrow-right", class: "fa-3x", style: "color:grey"), portfolio_posts_path(page: params[:page].to_i + 1), class: "nav-link" %>
+              <% else %>
+              <!-- blank space to just keep the nav in mid -->
+                <%= "" %>
+              <% end %>
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
+  </div>
+  <div class="col-lg-2">
+    <% if user_signed_in? %>
+      <%= link_to "Upload some stuff", new_portfolio_post_path, class: "btn btn-lg btn-secondary"  %>
+      <br>
+      <br>
+      <% if params[:edit] == "true" %>
+        <%= link_to "Stop Editing", portfolio_posts_path(page: params[:page]), class: "btn btn-lg btn-secondary" %>
+      <% else %>
+        <%= link_to "Edit Mode", portfolio_posts_path(edit: true, page: params[:page]), class: "btn btn-lg btn-secondary"  %>
+      <% end %>
+    <% end %>
   </div>
 </div>

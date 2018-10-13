@@ -7,20 +7,38 @@
 
 .container .delete {
   position: absolute;
-  transform: translate(-50%, -50%);
-  background-color: #555;
+  transform: translate(1500%, -675%);
+  background-color: red;
+  font-weight: bold;
   color: white;
   font-size: 14px;
   padding: 10px 10px;
   border-radius: 15px;
 }
 
+.space {
+  padding-top: 25px;
+}
+
 .container .portfolio-image {
-  //max-height: 200px;
-  //max-width: 400px;
-  padding-bottom: 25px;
+  border-style: solid;
+  border-color: grey;
+  border-width: 5px;
 }
 
 .container .portfolio-image:hover .delete {
   display: block;
+}
+
+.page-navigation {
+}
+
+.page-navigation .current-page {
+  font-weight: bold;
+  font-size: 22px;
+  color: grey;
+}
+
+.page-navigation .page-links {
+  color: grey;
 }

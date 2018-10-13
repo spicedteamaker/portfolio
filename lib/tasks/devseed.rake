@@ -5,7 +5,7 @@ namespace 'db' do
     # https://stackoverflow.com/questions/876396/do-rails-rake-tasks-provide-access-to-activerecord-models
     task :dev => :environment do
 
-      15.times do
+      8.times do
         p = Post.create(
             title: Faker::Fallout.quote,
             body: Faker::Lorem.paragraph(49)
@@ -16,9 +16,9 @@ namespace 'db' do
         p.save!
       end
 
-      rand(7..15).times do
+      0.times do
         p = PortfolioPost.create
-        rand(1..7).times do
+        3.times do
           p.pictures.attach(io: File.open(Rails.root.join('storage/test.png')), filename: 'test.png', content_type: 'image/png')
         end
         p.save!
