@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  get 'header_images/new'
+  post 'header_images/create'
   devise_for :users, controllers: {
     confirmations: 'users/confirmations',
     mailer: 'users/mailer',

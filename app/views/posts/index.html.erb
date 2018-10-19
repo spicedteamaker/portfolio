@@ -1,17 +1,27 @@
 <div class="container text-left">
   <div class="row">
     <div class="col-lg-3">
+      <h4> Pinned <h4>
+        <hr>
+      <% unless @pinnedPosts.empty? %>
+        <% @pinnedPosts.each do |p| %>
+          <%= link_to p.title, post_path(p), class: "pinned-posts" %>
+          <hr>
+        <% end %>
+      <% end %>
     </div>
     <div class="col-sm-12 col-lg-6">
-      <% @posts.each do |p| %>
-        <h3><%= link_to p.title, post_path(p), style: "text-decoration:underline;color:grey" %></h3>
-        <% unless p.main_picture.nil? %>
-          <%= image_tag p.main_picture, class: "img-fluid" %>
+      <% unless @posts.empty? %>
+        <% @posts.each do |p| %>
+          <h3><%= link_to p.title, post_path(p), class: "posts" %></h3>
+          <% unless p.main_picture.nil? %>
+            <%= image_tag p.main_picture, class: "img-fluid" %>
+          <% end %>
+          <%= p.body.truncate(150) %>
+          <%= link_to "More...", post_path(p) %>
+          <hr>
+          <br>
         <% end %>
-        <%= p.body.truncate(150) %>
-        <%= link_to "More...", post_path(p) %>
-        <hr>
-        <br>
       <% end %>
       <div class="nav">
         <div class="navbar-nav mr-auto">
@@ -19,7 +29,6 @@
         </div>
           <%= link_to_previous_page @posts, "Previous", style: "color:grey" %>
           &nbsp
-          |
           &nbsp
           <%= link_to_next_page @posts, "Next", style: "color:grey" %>
         <div class="navbar-nav ml-auto">

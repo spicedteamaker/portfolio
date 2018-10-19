@@ -13,7 +13,7 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 
     <!-- Navbar -->
-    <div class="navbar navbar-expand-sm navbar-dark bg-dark">
+    <div class="navbar fixed-top navbar-expand-sm navbar-dark bg-dark">
       <div class="container">
       <ul class="navbar-nav mr-auto">
         <%= link_to "Home", posts_path, class: "navbar-brand" %>
@@ -21,13 +21,22 @@
       <ul class="navbar-nav ml-auto">
         <li class="nav-item dropdown">
           <%= link_to "Menu", posts_path, class: "nav-link dropdown-toggle", id: "navbarDropdownMenu", 'data-toggle': "dropdown", 'aria-haspopup': true, 'aria-expanded': false %>
-
           <div class="dropdown-menu" aria-labelledby="navbarDropdownMenu">
             <%= link_to "Portfolio", portfolio_posts_path(page: 1), class: "dropdown-item" %>
             <%= link_to "Catalog",catalog_path, class: "dropdown-item" %>
+          </div>
+        </li>
+        <li class="nav-item dropdown">
+          <%= link_to "Profile", posts_path, class: "nav-link dropdown-toggle", id: "navbarDropdownMenu", 'data-toggle': "dropdown", 'aria-haspopup': true, 'aria-expanded': false %>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenu">
             <% if user_signed_in? %>
+              <%= link_to "Edit Profile", edit_user_registration_path, class: "dropdown-item" %>
+              <%= link_to "Sign Out", destroy_user_session_path(), method: :delete, class: "dropdown-item" %>
+              <% if user_operator_or_admin? %>
+                <hr>
                 <%= link_to "Create Post", new_post_path, class: "dropdown-item" %>
-                <%= link_to "Sign Out", destroy_user_session_path(), method: :delete, class: "dropdown-item" %>
+                <%= link_to "Upload to Portfolio", new_portfolio_post_path, class: "dropdown-item" %>
+              <% end %>
             <% end %>
             <% if !user_signed_in? %>
                 <%= link_to "Sign In", new_user_session_path, class: "dropdown-item" %>
@@ -37,8 +46,16 @@
       </ul>
     </div>
     </div>
+    <% if current_page?(posts_path) || current_page?(root_path) %>
+      <div class="jumbotron" style="background-image: url(<%= url_for(hero_image) %>)">
+        <% if user_operator_or_admin? %>
+          <div class="jumbotron-items">
+            <%= link_to "Change Header Image", header_images_new_path, class: "edit-header btn btn-md btn-secondary" %>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
   </head>
-
   <body>
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
@@ -47,6 +64,8 @@
         <%= flash[:error] %>
       </div>
     <% end %>
+    <br>
+    <br>
     <%= yield %>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>

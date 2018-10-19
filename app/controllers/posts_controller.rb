@@ -1,15 +1,16 @@
 class PostsController < ApplicationController
   include ApplicationHelper
 
-  before_action :check_privilage, only: [:new, :create, :edit, :update, :destroy]
+  before_action :check_privilege, only: [:new, :create, :edit, :update, :destroy]
 
   def index
+    @pinnedPosts = Post.where(pinned: true).order(:created_at).reverse_order
     @posts = Post.order(:created_at).reverse_order.page params[:page]
     @lastPageNum = Post.page(1).total_pages
   end
 
   def create
-    @post = Post.create(post_params)
+    @post = current_user.posts.create(post_params)
     if @post.valid?
       redirect_to post_path(@post)
     elsif !@post.valid?
@@ -54,19 +55,7 @@ class PostsController < ApplicationController
     @colMax = @colNum + 4
   end
 
-  def check_privilage
-    if !current_user.nil?
-      if !(current_user.operator? || current_user.admin?)
-        flash[:error] = "You do not have permission to access that page."
-        redirect_to root_path
-      end
-    else
-      flash[:error] = "You must log in to access that page."
-      redirect_to new_user_session_path
-    end
-  end
-
   def post_params
-    params.require(:post).permit(:title, :body, :main_picture)
+    params.require(:post).permit(:title, :body, :pinned, :main_picture)
   end
 end

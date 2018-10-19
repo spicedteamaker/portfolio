@@ -1,5 +1,5 @@
 class PortfolioPostsController < ApplicationController
-  before_action :check_privilage, only: [:new, :create, :edit, :update, :destroy]
+  before_action :check_privilege, only: [:new, :create, :edit, :update, :destroy]
 
   def index
     @editMode = false
@@ -67,18 +67,6 @@ class PortfolioPostsController < ApplicationController
     params.require(:portfolio_post).permit(:title, pictures: [])
   end
 
-  def check_privilage
-    if !current_user.nil?
-      if !(current_user.operator? || current_user.admin?)
-        flash[:error] = "You do not have permission to access that page."
-        redirect_to root_path
-      end
-    else
-      flash[:error] = "You must log in to access that page."
-      redirect_to new_user_session_path
-    end
-  end
-
   def paginate(pictures, page)
     onLastPage = false
     onFirstPage = false
@@ -89,7 +77,7 @@ class PortfolioPostsController < ApplicationController
       end
       return {pictures: (pictures[0..7]), onFirstPage: onFirstPage, onLastPage: onLastPage}
     end
-    # this includes 0, so 8 per page
+
     amountToRender = 8
     last = page * amountToRender - 1
     first = (page * amountToRender) - amountToRender

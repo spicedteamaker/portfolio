@@ -16,8 +16,10 @@
     <%= f.text_area :body, rows: "15", class: "form-control rounded-20", placeholder: "Body..." %>
     <br>
     <%= f.file_field :main_picture %>
-
+    <hr>
     <%= f.submit :Update %>
+    <%= f.check_box :pinned, class: "checkbox" %>
+    <%= "Pin This Post" %>
     <% end %>
     <br>
     <p> Or <%= link_to "Delete Whole Post", post_path(@post), method: "delete", data: { confirm: 'Are you sure?' }, class:"text-danger" %> permanently</p>

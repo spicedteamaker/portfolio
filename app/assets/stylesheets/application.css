@@ -14,3 +14,19 @@
  *= require_self
  *= require font-awesome
  */
+
+ .jumbotron {
+   height: 300px;
+   background-size: cover;
+   background-repeat: no-repeat;
+   background-position: center center;
+ }
+
+ .edit-header {
+   color: grey;
+   background-color: #343a40;
+ }
+
+ .jumbotron-items {
+   padding-top: 150px;
+ }

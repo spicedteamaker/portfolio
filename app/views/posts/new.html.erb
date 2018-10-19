@@ -10,14 +10,17 @@
       </ul>
     <% end %>
     <h3> Writing new post...</h3>
+    <hr>
     <%= form_for @post, url: {action: "create"} do |f| %>
     <%= f.text_field :title, class: "form-control", placeholder: "Title" %>
     <br>
     <%= f.text_area :body, rows: "15", class: "form-control rounded-20", placeholder: "Body..." %>
     <br>
-    <%= f.file_field :main_picture %>
-
+    <%= f.file_field :main_picture, direct_upload: true %>
+    <hr>
     <%= f.submit :Post %>
+    <%= f.check_box :pinned, class: "checkbox" %>
+    <%= "Pin This Post" %>
     <% end %>
   </div>
 </div>

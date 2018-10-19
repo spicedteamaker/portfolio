@@ -1,11 +1,12 @@
 <div class="container text-center">
-  <% if !current_user.nil? %>
-    <% if current_user.role == "admin" || current_user.role == "operator" %>
-      <p> Not happy with this? <%= link_to "Edit...", edit_post_path(@post.id) %></p>
-    <% end %>
+  <% if user_operator_or_admin? %>
+    <p> Not happy with this? <%= link_to "Edit...", edit_post_path(@post.id) %></p>
   <% end %>
   <h3><%= @post.title %></h3>
+  <i> by <%= @post.user.firstname %> <%= @post.user.lastname %></i>
   <%= image_tag @post.main_picture, class: "img-fluid" %>
   <hr>
-  <%= @post.body %>
+  <div class="text-left">
+    <%= simple_format(@post.body) %>
+  </div>
 </div>

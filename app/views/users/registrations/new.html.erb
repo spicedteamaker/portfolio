@@ -6,7 +6,8 @@
       <h2>Sign up</h2>
       <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
         <%= devise_error_messages! %>
-
+          <%= f.text_field :firstname, placeholder: "First Name", class: "form-control" %>
+          <%= f.text_field :lastname, placeholder: "Last Name", class: "form-control" %>
           <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "Email Address", class: "form-control" %>
 
           <% if @minimum_password_length %>
