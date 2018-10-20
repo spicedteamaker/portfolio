@@ -51,6 +51,7 @@ gem 'kaminari'
 gem 'font-awesome-rails'
 gem 'jquery-rails'
 gem 'ruby-filemagic'
+gem 'pg'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
