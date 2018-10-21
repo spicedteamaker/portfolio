@@ -5,7 +5,7 @@
         <hr>
       <% unless @pinnedPosts.empty? %>
         <% @pinnedPosts.each do |p| %>
-          <%= link_to p.title, post_path(p), class: "pinned-posts" %>
+          <%= link_to p.title, post_path(p),class: "pinned-posts" %>
           <hr>
         <% end %>
       <% end %>
@@ -15,7 +15,8 @@
         <% @posts.each do |p| %>
           <h3><%= link_to p.title, post_path(p), class: "posts" %></h3>
           <% unless p.main_picture.nil? %>
-            <%= image_tag p.main_picture, class: "img-fluid" %>
+            <%= link_to (image_tag p.main_picture.variant(resize: "450x300"), class: "img-fluid"), url_for(p.main_picture) %>
+            <br>
           <% end %>
           <%= p.body.truncate(150) %>
           <%= link_to "More...", post_path(p) %>
