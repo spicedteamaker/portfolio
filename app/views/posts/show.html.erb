@@ -3,7 +3,7 @@
     <p> Not happy with this? <%= link_to "Edit...", edit_post_path(@post.id) %></p>
   <% end %>
   <h3><%= @post.title %></h3>
-  <i> by <%= @post.user.firstname %> <%= @post.user.lastname %></i>
+  <i> by <%= @post.user.firstname %> <%= @post.user.lastname %>, <%= @post.created_at.strftime("%B %d, %Y at %H:%M") %> </i>
   <%= image_tag @post.main_picture, class: "img-fluid" %>
   <hr>
   <div class="text-left">
