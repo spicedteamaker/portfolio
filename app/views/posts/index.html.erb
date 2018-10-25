@@ -1,6 +1,11 @@
 <div class="container text-left">
   <div class="row">
     <div class="col-lg-3">
+      <% if user_operator_or_admin? %>
+        <%= link_to "Create Post", new_post_path, class: "edit-header btn btn-md btn-secondary" %>
+        <br>
+        <br>
+      <% end %>
       <h4> Pinned <h4>
         <hr>
       <% unless @pinnedPosts.empty? %>

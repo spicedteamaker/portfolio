@@ -1,6 +1,7 @@
 <div class="row">
   <div class="col-lg-2">
     <% if user_operator_or_admin? %>
+      <%= link_to "Upload to Portfolio", new_portfolio_post_path, class: "edit-header btn btn-md btn-secondary" %>
       <% if params[:edit] == "true" %>
         <%= link_to "Stop Editing", portfolio_posts_path(page: params[:page]), class: "edit-header btn btn-md btn-secondary" %>
       <% else %>

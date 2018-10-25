@@ -19,12 +19,14 @@
           <%= link_to "Home", posts_path, class: "navbar-brand" %>
         </ul>
         <ul class="navbar-nav ml-auto">
-          <li class="nav-item dropdown">
-            <%= link_to "Menu", posts_path, class: "nav-link dropdown-toggle", id: "navbarDropdownMenu", 'data-toggle': "dropdown", 'aria-haspopup': true, 'aria-expanded': false %>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenu">
-              <%= link_to "Portfolio", portfolio_posts_path(page: 1), class: "dropdown-item" %>
-              <%= link_to "Catalog",catalog_path, class: "dropdown-item" %>
-            </div>
+          <li class="nav-item">
+            <%= link_to "Blog", posts_path, class: "nav-link" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "Catalog",catalog_path, class: "nav-link" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "Portfolio", portfolio_posts_path(page: 1), class: "nav-link" %>
           </li>
           <li class="nav-item dropdown">
             <%= link_to "Profile", posts_path, class: "nav-link dropdown-toggle", id: "navbarDropdownMenu", 'data-toggle': "dropdown", 'aria-haspopup': true, 'aria-expanded': false %>
@@ -32,11 +34,6 @@
               <% if user_signed_in? %>
                 <%= link_to "Edit Profile", edit_user_registration_path, class: "dropdown-item" %>
                 <%= link_to "Sign Out", destroy_user_session_path(), method: :delete, class: "dropdown-item" %>
-                <% if user_operator_or_admin? %>
-                  <hr>
-                  <%= link_to "Create Post", new_post_path, class: "dropdown-item" %>
-                  <%= link_to "Upload to Portfolio", new_portfolio_post_path, class: "dropdown-item" %>
-                <% end %>
               <% end %>
               <% if !user_signed_in? %>
                   <%= link_to "Sign In", new_user_session_path, class: "dropdown-item" %>
