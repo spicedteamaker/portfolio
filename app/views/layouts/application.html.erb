@@ -13,34 +13,41 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 
     <!-- Navbar -->
-    <div class="navbar fixed-top navbar-expand-sm navbar-dark bg-dark">
+    <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
       <div class="container">
         <ul class="navbar-nav mr-auto">
           <%= link_to "Home", posts_path, class: "navbar-brand" %>
         </ul>
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item">
-            <%= link_to "Blog", posts_path, class: "nav-link" %>
-          </li>
-          <li class="nav-item">
-            <%= link_to "Catalog",catalog_path, class: "nav-link" %>
-          </li>
-          <li class="nav-item">
-            <%= link_to "Portfolio", portfolio_posts_path(page: 1), class: "nav-link" %>
-          </li>
-          <li class="nav-item dropdown">
-            <%= link_to "Profile", posts_path, class: "nav-link dropdown-toggle", id: "navbarDropdownMenu", 'data-toggle': "dropdown", 'aria-haspopup': true, 'aria-expanded': false %>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenu">
-              <% if user_signed_in? %>
-                <%= link_to "Edit Profile", edit_user_registration_path, class: "dropdown-item" %>
-                <%= link_to "Sign Out", destroy_user_session_path(), method: :delete, class: "dropdown-item" %>
-              <% end %>
-              <% if !user_signed_in? %>
-                  <%= link_to "Sign In", new_user_session_path, class: "dropdown-item" %>
-              <% end %>
-            </div>
-          </li>
-        </ul>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <%= link_to "Blog", posts_path, class: "nav-link" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "Catalog",catalog_path, class: "nav-link" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "Portfolio", portfolio_posts_path(page: 1), class: "nav-link" %>
+            </li>
+            <li class="nav-item dropdown">
+              <%= link_to "Profile", posts_path, class: "nav-link dropdown-toggle", id: "navbarDropdownMenu", 'data-toggle': "dropdown", 'aria-haspopup': true, 'aria-expanded': false %>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdownMenu">
+                <% if user_signed_in? %>
+                  <%= link_to "Edit Profile", edit_user_registration_path, class: "dropdown-item" %>
+                  <%= link_to "Sign Out", destroy_user_session_path(), method: :delete, class: "dropdown-item" %>
+                <% end %>
+                <% if !user_signed_in? %>
+                    <%= link_to "Sign In", new_user_session_path, class: "dropdown-item" %>
+                <% end %>
+              </div>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
     <% if current_page?(posts_path) || current_page?(root_path) %>
@@ -61,8 +68,6 @@
         <%= flash[:error] %>
       </div>
     <% end %>
-    <br>
-    <br>
     <%= yield %>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>

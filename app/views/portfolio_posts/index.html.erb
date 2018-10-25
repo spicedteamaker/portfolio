@@ -1,19 +1,19 @@
 <div class="row">
   <div class="col-lg-2">
     <% if user_operator_or_admin? %>
-      <%= link_to "Upload to Portfolio", new_portfolio_post_path, class: "edit-header btn btn-md btn-secondary" %>
+      <%= link_to "Upload to Portfolio", new_portfolio_post_path, class: "tools btn btn-md btn-secondary" %>
+      <br>
       <% if params[:edit] == "true" %>
-        <%= link_to "Stop Editing", portfolio_posts_path(page: params[:page]), class: "edit-header btn btn-md btn-secondary" %>
+        <%= link_to "Stop Editing", portfolio_posts_path(page: params[:page]), class: "tools btn btn-md btn-secondary" %>
       <% else %>
-        <%= link_to "Edit Mode", portfolio_posts_path(edit: true, page: params[:page]), class: "edit-header btn btn-md btn-secondary" %>
+        <%= link_to "Edit Mode", portfolio_posts_path(edit: true, page: params[:page]), class: "tools btn btn-md btn-secondary" %>
       <% end %>
     <% end %>
   </div>
-  <div class="col-lg-8">
+  <div class="col-sm-11 col-lg-8">
     <div class="row">
       <% if @pictures.empty? %>
-        <h3> No pictures found on this page! </h3>
-        <h3><%= link_to "Back to top...", portfolio_posts_path(page: 1), style: "padding-left:50px" %></h3>
+        <h3> No pictures found on this page! <%= link_to "Back to top...", portfolio_posts_path(page: 1) %></h3>
       <% else %>
         <% @pictures.each do |p| %>
           <div class="col-sm-6 col-lg-6">
