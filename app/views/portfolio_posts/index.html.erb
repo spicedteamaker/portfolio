@@ -10,7 +10,7 @@
       <% end %>
     <% end %>
   </div>
-  <div class="col-sm-11 col-lg-8">
+  <div class="col-sm-8 col-lg-8">
     <div class="row">
       <% if @pictures.empty? %>
         <h3> No pictures found on this page! <%= link_to "Back to top...", portfolio_posts_path(page: 1) %></h3>
@@ -18,7 +18,9 @@
         <% @pictures.each do |p| %>
           <div class="col-sm-6 col-lg-6">
             <div class="container">
-              <%= link_to (image_tag p.variant(resize: "450x300"), class: "portfolio-image img-fluid"), url_for(p) %>
+              <div class="thumbnail-area">
+                <%= link_to (image_tag p.variant(resize: "450x300"), class: "portfolio-image img-fluid"), url_for(p) %>
+              </div>
               <div class="space">
               </div>
               <% if user_signed_in? && @editMode == true %>

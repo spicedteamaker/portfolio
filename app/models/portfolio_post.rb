@@ -25,10 +25,12 @@ class PortfolioPost < ApplicationRecord
   end
 
   def validate_mime_type
+    tmpDirFile = "/var/tmp/magick-verification"
     unless pictures.nil?
       pictures.each do |p|
         url = "http://localhost:3000" + Rails.application.routes.url_helpers.rails_blob_path(p, only_path: true)
-        image = MiniMagick::Image.new(url)
+        IO.copy_stream(open(url), tmpDirFile)
+        image = MiniMagick::Image.new(tmpDirFile)
         unless image.valid?
           errors.add(:portfolio_post, "only allows valid image files. Are you sure you're uploading a real image?")
           return false
