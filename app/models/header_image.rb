@@ -1,6 +1,8 @@
 class HeaderImage < ApplicationRecord
   has_one_attached :picture # one-to-many relationship
-  validate :validate_mime_type
+  validates :picture, attached: true, content_type: ['image/png', 'image/jpg', 'image/jpeg']
+
+  # validate :validate_mime_type
 
   def validate_mime_type
     tmpDirFile = "/var/tmp/magick-verification"

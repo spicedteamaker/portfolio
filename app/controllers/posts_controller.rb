@@ -28,11 +28,14 @@ class PostsController < ApplicationController
 
   def update
     @post = Post.find(params[:id])
+    if params[:main_picture] != nil
+      @post.main_picture.attach params[:main_picture]
+    end
     @post.update(post_params)
     if @post.valid?
       @post.save
       redirect_to post_path(@post)
-    elsif !post.valid?
+    elsif !@post.valid?
       render edit_post_path
     end
   end
