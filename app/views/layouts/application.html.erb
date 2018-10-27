@@ -51,7 +51,7 @@
       </div>
     </div>
     <% if current_page?(posts_path) || current_page?(root_path) %>
-      <div class="jumbotron" style="background-image: url(<%= url_for(hero_image) %>)">
+      <div class="jumbotron img-fluid" style="background-image: url(<%= url_for(hero_image.variant(resize: "2240x1680")) %>)">
         <% if user_operator_or_admin? %>
           <div class="jumbotron-items">
             <%= link_to "Change Header Image", header_images_new_path, class: "edit-header btn btn-md btn-secondary" %>
