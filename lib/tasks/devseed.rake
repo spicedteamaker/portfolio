@@ -39,7 +39,7 @@ namespace 'db' do
 
       editor = User.find_by(email: "beep@beep.com")
       12.times do
-        p = editor.posts.create(
+        p = editor.posts.new(
             title: Faker::Fallout.quote,
             body: Faker::Lorem.paragraph(49)
         )
