@@ -74,16 +74,10 @@ Rails.application.configure do
   # }
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = true
-  config.action_mailer.default_options = {from: ENV["COCK_USERNAME"]}
-
+  # development smtp with mailcatcher, on production we use a normal sendmail
   config.action_mailer.delivery_method = :smtp
-  config.action_mailer.smtp_settings = {
-    address:              'mail.cock.li',
-    port:                 587,
-    domain:               'cock.li',
-    user_name:            ENV["COCK_USERNAME"],
-    password:             ENV["COCK_PASSWORD"],
-    authentication:       'plain',
-    enable_starttls_auto: true }
+  config.action_mailer.smtp_settings = { address: 'localhost', port: 1025 }
+  config.action_mailer.default_url_options = {host: ENV['HOST_URL'], port: ENV['HOST_PORT']}
+  config.action_mailer.default_options = {from: ENV['MAILER_EMAIL']}
 
 end
