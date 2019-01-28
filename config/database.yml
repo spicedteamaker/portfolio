@@ -12,9 +12,7 @@ development:
   <<: *default
   adapter: postgresql
   encoding: unicode
-  database: <%= ENV['PGS_DB_NAME'] %>
-  username: <%= ENV['PGS_USERNAME'] %>
-  password: <%= ENV['PGS_PASSWORD'] %>
+  database: portfolio_development
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
