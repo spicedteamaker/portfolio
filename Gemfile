@@ -56,6 +56,7 @@ gem 'pg'
 # https://github.com/igorkasyanchuk/active_storage_validations
 # (updated often, very new)
 gem 'active_storage_validations'
+gem 'will_paginate'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

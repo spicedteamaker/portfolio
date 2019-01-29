@@ -1,0 +1,9 @@
+<h3><%= link_to post.title, post_path(post), class: "posts" %></h3>
+<% unless post.main_picture.nil? %>
+  <%= link_to (image_tag post.main_picture.variant(resize: "640x480"), class: "img-fluid"), url_for(post.main_picture) %>
+  <br>
+<% end %>
+<%= post.body.truncate(150) %>
+<%= link_to "More...", post_path(post) %>
+<hr>
+<br>

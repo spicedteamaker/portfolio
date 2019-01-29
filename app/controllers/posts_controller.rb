@@ -5,8 +5,14 @@ class PostsController < ApplicationController
 
   def index
     @pinnedPosts = Post.where(pinned: true).order(:created_at).reverse_order
-    @posts = Post.order(:created_at).reverse_order.page params[:page]
+    @posts = Post.order(:created_at).reverse_order.paginate(page: params[:page], per_page: 2)
     @lastPageNum = Post.page(1).total_pages
+    @test = "Hello, World!"
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def create
