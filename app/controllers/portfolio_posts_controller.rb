@@ -29,16 +29,15 @@ class PortfolioPostsController < ApplicationController
   end
 
   def create
-    @portfolioPost = PortfolioPost.create(portfolio_post_params)
-    if @portfolioPost.valid?
-      redirect_to portfolio_posts_path(page: 1)
-    else
-      render new_portfolio_post_path
-    end
+    # we allow for multiple image uploads, and create an individual
+    # portfolio post with each file uploaded
+    puts "*" * 30
+    puts params[:pictures][0]
+    puts "*" * 30
+    redirect_to new_portfolio_post_path
   end
 
   def new
-    @portfolioPost = PortfolioPost.new
   end
 
   def edit

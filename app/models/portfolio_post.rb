@@ -1,7 +1,7 @@
 class PortfolioPost < ApplicationRecord
-  has_many_attached :pictures
+  has_one_attached :picture
   validates :title, presence: true
-  validates :pictures, attached: true, content_type: ['image/png', 'image/jpg', 'image/jpeg']
+  validates :picture, attached: true, content_type: ['image/png', 'image/jpg', 'image/jpeg']
 
 
   # FIXME doesn't work at all

@@ -16,6 +16,7 @@ Rails.application.routes.draw do
 
   resources :posts
   get 'catalog', to: 'posts#catalog'
-  resources :portfolio_posts
+  resources :portfolio_posts, except: [:create]
+  post "/portfolio_posts/create", :as => "create_portfolio_post"
 
 end

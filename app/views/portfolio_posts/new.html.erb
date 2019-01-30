@@ -1,21 +1,12 @@
-  <div class="row">
-    <div class="col-sm-4">
-    </div>
-    <div class="col-sm-4">
-      <% if @portfolioPost.errors.any? %>
-        <ul>
-        <% @portfolioPost.errors.full_messages.each do |e| %>
-          <li class="text-danger"><%= e %></li>
-          <% end %>
-        </ul>
-      <% end %>
+<div class="row">
+  <div class="col-sm-4">
+  </div>
+  <div class="col-sm-4">
+    <%= form_tag create_portfolio_post_path do %>
+      <%= file_field_tag :pictures, multiple: true, direct_upload: true %>
+      <%= hidden_field_tag :title, value: "portfolio_post" %>
       <hr>
-      <%= form_for @portfolioPost, url: {action: "create"} do |f| %>
-        <%= f.file_field :pictures, multiple: true, direct_upload: true %>
-        <%= f.hidden_field :title, value: "portfolio_post" %>
-        <hr>
-        <%= f.submit "Upload" %>
-      <% end %>
-    </div>
+      <%= submit_tag "Upload" %>
+    <% end %>
   </div>
 </div>
