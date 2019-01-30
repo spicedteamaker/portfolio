@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_30_230706) do
+ActiveRecord::Schema.define(version: 2019_01_30_184029) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -55,6 +55,7 @@ ActiveRecord::Schema.define(version: 2018_10_30_230706) do
     t.string "body"
     t.boolean "pinned"
     t.integer "user_id"
+    t.string "tags", array: true
   end
 
   create_table "users", force: :cascade do |t|

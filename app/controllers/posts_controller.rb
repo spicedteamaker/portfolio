@@ -5,7 +5,7 @@ class PostsController < ApplicationController
 
   def index
     @pinnedPosts = Post.where(pinned: true).order(:created_at).reverse_order
-    @posts = Post.order(:created_at).reverse_order.paginate(page: params[:page], per_page: 2)
+    @posts = Post.order(:created_at).reverse_order.paginate(page: params[:page], per_page: 5)
     @lastPageNum = Post.page(1).total_pages
     @test = "Hello, World!"
 
@@ -15,21 +15,24 @@ class PostsController < ApplicationController
     end
   end
 
+  def new
+    @post = Post.new
+  end
+
   def create
-    @post = current_user.posts.create(post_params)
+    @post = current_user.posts.new(post_params)
+    @post.tags = makeTags(params.fetch(:post, {}).permit(:tags)["tags"].to_s)
     if @post.valid?
+      @post.save
       redirect_to post_path(@post)
     elsif !@post.valid?
       render new_post_path
     end
   end
 
-  def new
-    @post = Post.new
-  end
-
   def edit
     @post = Post.find(params[:id])
+    @tags = tagify(@post.tags)
   end
 
   def update
@@ -62,6 +65,24 @@ class PostsController < ApplicationController
     @year = nil
     @colNum = 0
     @colMax = @colNum + 4
+  end
+
+  private
+
+  def tagify(tagArray)
+    # converts to string with hashtags
+    tagString = tagArray * "#"
+    firstHash = "#"
+    unless tagString.empty?
+      return firstHash + tagString
+    end
+    tagString
+  end
+
+  def makeTags(tagString)
+    a = tagString.split("#")
+    # we drop the first element, because splitting it adds an empty char at [0]
+    a.drop(1)
   end
 
   def post_params

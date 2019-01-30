@@ -3,6 +3,13 @@
     <p> Not happy with this? <%= link_to "Edit...", edit_post_path(@post.id) %></p>
   <% end %>
   <h3><%= @post.title %></h3>
+  <% unless @post.tags.nil? %>
+    <div class="tags-text">
+      <% @post.tags.each do |t| %>
+        <%= link_to "##{t}", posts_path(filtertag: t) %>
+      <% end %>
+    </div>
+  <% end %>
   <i> by <%= @post.user.firstname %> <%= @post.user.lastname %>, <%= @post.created_at.strftime("%B %d, %Y at %H:%M") %> </i>
   <%= image_tag @post.main_picture, class: "img-fluid" %>
   <hr>

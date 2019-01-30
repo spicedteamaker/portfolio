@@ -16,6 +16,8 @@
     <br>
     <%= f.text_area :body, rows: "15", class: "form-control rounded-20", placeholder: "Body..." %>
     <br>
+    <%= f.text_field :tags, class: "form-control", placeholder: "#sky#bright horizon#living it up" %>
+    <hr>
     <%= f.file_field :main_picture, direct_upload: true %>
     <hr>
     <%= f.submit :Post %>
