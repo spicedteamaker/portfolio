@@ -10,18 +10,6 @@
     <% end %>
   </div>
 </div>
-      <!--
-      <% unless @portfolioPosts.nil? %>
-        <% @portfolioPosts.each do |p| %>
-          <div class="col-sm-6 col-lg-6">
-            <%= link_to (image_tag p.picture.variant(resize: "450x300"), class: "portfolio-image img-fluid"), url_for(p) %>
-            <% if user_operator_or_admin? && @editMode %>
-              <%= link_to "Delete", portfolio_post_path(p), method: "delete", data: { confirm: 'Are you sure?' }, class:"text-danger" %>
-            <% end %>
-          </div>
-        <% end %>
-      <% end %>
-    -->
 <div class="container text-center">
   <div class="row portfolio-posts">
     <%= render @portfolioPosts %>

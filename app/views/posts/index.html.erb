@@ -14,22 +14,6 @@
       <% end %>
     </div>
     <div class="col-sm-12 col-lg-6">
-
-      <!--
-      <% unless @posts.empty? %>
-        <% @posts.each do |p| %>
-          <h3><%= link_to p.title, post_path(p), class: "posts" %></h3>
-          <% unless p.main_picture.nil? %>
-            <%= link_to (image_tag p.main_picture.variant(resize: "640x480"), class: "img-fluid"), url_for(p.main_picture) %>
-            <br>
-          <% end %>
-          <%= p.body.truncate(150) %>
-          <%= link_to "More...", post_path(p) %>
-          <hr>
-          <br>
-        <% end %>
-      <% end %>
-    -->
       <div id="blog-posts">
         <%= render @posts %>
       </div>
