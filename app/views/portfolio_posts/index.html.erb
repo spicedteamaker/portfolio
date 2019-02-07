@@ -2,34 +2,33 @@
   <div class="col-lg-2">
     <% if user_operator_or_admin? %>
       <%= link_to "Upload to Portfolio", new_portfolio_post_path, class: "tools btn btn-md btn-secondary" %>
-      <br>
-      <% if params[:edit] == "true" %>
-        <%= link_to "Stop Editing", portfolio_posts_path(page: params[:page]), class: "tools btn btn-md btn-secondary" %>
+      <% if !@editMode %>
+        <%= link_to "Edit Mode", portfolio_posts_path(edit: true), class: "tools btn btn-md btn-secondary" %>
       <% else %>
-        <%= link_to "Edit Mode", portfolio_posts_path(edit: true, page: params[:page]), class: "tools btn btn-md btn-secondary" %>
+        <%= link_to "Stop Editing", portfolio_posts_path, class: "tools btn btn-md btn-secondary" %>
       <% end %>
     <% end %>
   </div>
-  <div class="col-sm-8 col-lg-8">
-    <div class="row">
-      <% if @portfolioPosts.nil? %>
-        <h3> No pictures found on this page! <%= link_to "Back to top...", portfolio_posts_path(page: 1) %></h3>
-      <% else %>
+</div>
+      <!--
+      <% unless @portfolioPosts.nil? %>
         <% @portfolioPosts.each do |p| %>
           <div class="col-sm-6 col-lg-6">
-            <div class="container">
-              <div class="thumbnail-area">
-                <%= link_to (image_tag p.picture.variant(resize: "450x300"), class: "portfolio-image img-fluid"), url_for(p.picture) %>
-              </div>
-              <div class="space">
-            </div>
+            <%= link_to (image_tag p.picture.variant(resize: "450x300"), class: "portfolio-image img-fluid"), url_for(p) %>
+            <% if user_operator_or_admin? && @editMode %>
+              <%= link_to "Delete", portfolio_post_path(p), method: "delete", data: { confirm: 'Are you sure?' }, class:"text-danger" %>
+            <% end %>
           </div>
         <% end %>
       <% end %>
-      <div class="container">
-      </div>
-    </div>
+    -->
+<div class="container text-center">
+  <div class="row portfolio-posts">
+    <%= render @portfolioPosts %>
   </div>
-  <div class="col-lg-2">
+
+  <div id="infinite-scrolling">
+    <%= will_paginate @portfolioPosts %>
   </div>
+
 </div>

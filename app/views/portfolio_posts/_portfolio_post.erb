@@ -1,0 +1,6 @@
+<div class="col-sm-6 col-lg-3 text-center">
+  <% if user_operator_or_admin? && @editMode %>
+    <%= link_to "Delete", portfolio_post_path(portfolio_post), method: "delete", data: { confirm: 'Are you sure?' }, class:"text-danger" %>
+  <% end %>
+  <%= link_to (image_tag portfolio_post.picture.variant(resize: "450x300"), class: "portfolio-image img-fluid"), url_for(portfolio_post) %>
+</div>

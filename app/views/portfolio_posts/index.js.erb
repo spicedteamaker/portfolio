@@ -1,0 +1,7 @@
+$('.row.portfolio-posts').append('<%= j render @portfolioPosts %>');
+<% if @portfolioPosts.next_page %>
+  $('.pagination').replaceWith('<%= j will_paginate @portfolioPosts %>');
+<% else %>
+  $(window).off('scroll');
+  $('.pagination').remove();
+<% end %>
