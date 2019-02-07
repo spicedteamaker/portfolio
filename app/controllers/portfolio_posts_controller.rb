@@ -16,13 +16,11 @@ class PortfolioPostsController < ApplicationController
   def create
     # we allow for multiple image uploads, and create an individual
     # portfolio post with each file uploaded
-    puts "*" * 30
     params[:pictures].each do |picture|
       p = PortfolioPost.new(title: params[:title])
       p.picture.attach(picture)
       p.save
     end
-    puts "*" * 30
     redirect_to portfolio_posts_path
   end
 
