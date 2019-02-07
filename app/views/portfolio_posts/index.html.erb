@@ -12,61 +12,21 @@
   </div>
   <div class="col-sm-8 col-lg-8">
     <div class="row">
-      <% if @pictures.empty? %>
+      <% if @portfolioPosts.nil? %>
         <h3> No pictures found on this page! <%= link_to "Back to top...", portfolio_posts_path(page: 1) %></h3>
       <% else %>
-        <% @pictures.each do |p| %>
+        <% @portfolioPosts.each do |p| %>
           <div class="col-sm-6 col-lg-6">
             <div class="container">
               <div class="thumbnail-area">
-                <%= link_to (image_tag p.variant(resize: "450x300"), class: "portfolio-image img-fluid"), url_for(p) %>
+                <%= link_to (image_tag p.picture.variant(resize: "450x300"), class: "portfolio-image img-fluid"), url_for(p.picture) %>
               </div>
               <div class="space">
-              </div>
-              <% if user_signed_in? && @editMode == true %>
-                <% if current_user.role == "operator" || current_user.role == "admin" %>
-                  <%= link_to "x", portfolio_post_path(id: p.id, page: params[:page], pageTotal: @pictures.count-1), method: "delete", data: { confirm: 'Are you sure?' }, class: "delete" %>
-                <% end %>
-              <% end %>
             </div>
           </div>
         <% end %>
       <% end %>
       <div class="container">
-        <div class="navbar navbar-expand">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-              <% if !@onFirstPage && params[:page].to_i > 1 %>
-                <%= link_to fa_icon("arrow-left", class: "fa-3x", style: "color:grey"), portfolio_posts_path(page: params[:page].to_i - 1), class: "nav-link", style: "padding-right:20px" %>
-              <% else %>
-                <!-- blank space to just keep the nav in mid -->
-                <%= "" %>
-              <% end %>
-            </li>
-          </ul>
-          <ul class="navbar-nav ml-auto mr-auto">
-            <li class="page-navigation nav-item">
-              <% @pageNav.each do |n| %>
-                <% if n == params[:page].to_i %>
-                  <%= link_to "#{n}", portfolio_posts_path(page: n), class: "current-page"%>
-                <% else %>
-                  <%= link_to n, portfolio_posts_path(page: n), class: "page-links" %>
-                <% end %>
-              <% end %>
-            </li>
-          </ul>
-          <ul class="navbar-nav ml-auto">
-            <!-- Not sure why the right arrow is more towards the right, pad it to align with left arrow -->
-            <li class="nav-item">
-              <% if !@onLastPage %>
-                <%= link_to fa_icon("arrow-right", class: "fa-3x", style: "color:grey"), portfolio_posts_path(page: params[:page].to_i + 1), class: "nav-link" %>
-              <% else %>
-              <!-- blank space to just keep the nav in mid -->
-                <%= "" %>
-              <% end %>
-            </li>
-          </ul>
-        </div>
       </div>
     </div>
   </div>

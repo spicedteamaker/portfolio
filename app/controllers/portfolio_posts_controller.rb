@@ -3,26 +3,7 @@ class PortfolioPostsController < ApplicationController
 
   def index
     @editMode = false
-    portfolioPosts = PortfolioPost.order(:created_at).reverse_order
-    @pictures = []
-    portfolioPosts.each do |p|
-      p.pictures.each do |m|
-        @pictures.push(m)
-      end
-    end
-    page = params[:page].to_i
-    @totalPages = get_total_pages(@pictures)
-    @pageNav = pagination_range(page, @totalPages)
-    pageInfo = paginate(@pictures, page)
-    @pictures = pageInfo[:pictures]
-    @onFirstPage = pageInfo[:onFirstPage]
-    @onLastPage = pageInfo[:onLastPage]
-
-
-    if @pictures.nil?
-      @pictures = []
-    end
-
+    @portfolioPosts = PortfolioPost.all
     if params[:edit] == "true"
       @editMode = true
     end
@@ -32,7 +13,11 @@ class PortfolioPostsController < ApplicationController
     # we allow for multiple image uploads, and create an individual
     # portfolio post with each file uploaded
     puts "*" * 30
-    puts params[:pictures][0]
+    params[:pictures].each do |picture|
+      p = PortfolioPost.new(title: params[:title])
+      p.picture.attach(picture)
+      p.save
+    end
     puts "*" * 30
     redirect_to new_portfolio_post_path
   end

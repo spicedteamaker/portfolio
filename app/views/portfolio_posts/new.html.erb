@@ -3,7 +3,7 @@
   </div>
   <div class="col-sm-4">
     <%= form_tag create_portfolio_post_path do %>
-      <%= file_field_tag :pictures, multiple: true, direct_upload: true %>
+      <%= file_field_tag "pictures[]", multiple: true, direct_upload: true %>
       <%= hidden_field_tag :title, value: "portfolio_post" %>
       <hr>
       <%= submit_tag "Upload" %>

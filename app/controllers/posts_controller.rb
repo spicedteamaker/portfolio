@@ -37,6 +37,7 @@ class PostsController < ApplicationController
 
   def update
     @post = Post.find(params[:id])
+    @post.tags = makeTags(params.fetch(:post, {}).permit(:tags)["tags"].to_s)
     if params[:main_picture] != nil
       @post.main_picture.attach params[:main_picture]
     end
@@ -71,6 +72,9 @@ class PostsController < ApplicationController
 
   def tagify(tagArray)
     # converts to string with hashtags
+    if tagArray.nil?
+      return []
+    end
     tagString = tagArray * "#"
     firstHash = "#"
     unless tagString.empty?
