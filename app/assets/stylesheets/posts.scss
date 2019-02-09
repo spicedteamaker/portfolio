@@ -53,10 +53,52 @@
   color: grey;
 }
 
-.body-text {
-
-}
 
 .create-post-button {
   margin-bottom: 20px;
+}
+
+.toggle-tags-link {
+  text-decoration: underline;
+  color: grey;
+}
+
+.toggle-tags-link:hover {
+  color: darkblue;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.toggle-pinned-link {
+  text-decoration: underline;
+  color: grey;
+}
+
+.toggle-pinned-link:hover {
+  color: darkblue;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.pinned-posts-area {
+  display: none;
+}
+
+.tag-links {
+  color: grey;
+  margin: 5px;
+}
+
+.selected-tag-links {
+  color: grey;
+  margin-left: 5px;
+}
+
+.tag-links-area {
+  display: none;
+}
+
+.clear-tags-link {
+  color: grey;
+  font-weight: bold;
 }

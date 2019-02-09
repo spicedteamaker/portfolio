@@ -6,13 +6,22 @@ class PostsController < ApplicationController
   def index
     @pinnedPosts = Post.where(pinned: true).order(:created_at).reverse_order
     @posts = Post.order(:created_at).reverse_order.paginate(page: params[:page], per_page: 5)
-    @lastPageNum = Post.page(1).total_pages
-    @test = "Hello, World!"
+    @tags = getTags(Post.all).sort
+
+    unless params[:filtertag].nil?
+      @filterOn = true
+      filteredIDs = getFilteredPostIDs(params[:filtertag].to_s, Post.all)
+      @posts = @posts.where(id: filteredIDs)
+      @posts.order(:created_at).reverse_order.paginate(page: params[:page], per_page: 5)
+    end
 
     respond_to do |format|
       format.html
       format.js
     end
+    puts "*"*50
+    puts filteredIDs
+    puts "*"*50
   end
 
   def new
@@ -87,6 +96,41 @@ class PostsController < ApplicationController
     a = tagString.split("#")
     # we drop the first element, because splitting it adds an empty char at [0]
     a.drop(1)
+  end
+
+  def getTags(posts)
+    tags = []
+    posts.each do |p|
+      unless p.tags.nil?
+        p.tags.each do |t|
+          unless tags.include? t
+            tags << t
+          end
+        end
+      end
+    end
+    puts "*" * 30
+    tags.each do |t|
+      puts t
+    end
+    puts "*" * 30
+    tags
+  end
+
+  def getFilteredPostIDs(tag, posts)
+    filteredArray = []
+    posts.each do |p|
+      unless p.tags.nil?
+        if p.tags.include? tag
+          filteredArray << p
+        end
+      end
+    end
+    ids = []
+    filteredArray.each do |f|
+      ids << f.id
+    end
+    ids
   end
 
   def post_params
