@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  # validations
+  validates :email, :firstname, :lastname, :role, presence: true
 
   # docs for enums: https://api.rubyonrails.org/classes/ActiveRecord/Enum.html
   enum role: [:basic, :operator, :admin]

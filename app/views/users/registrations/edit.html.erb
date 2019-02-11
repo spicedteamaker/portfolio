@@ -4,16 +4,21 @@
     </div>
     <div class="col-sm-4">
       <h2>Update Profile </h2>
-      <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+      <%= form_for(resource, as: resource_name, url: user_registration_path, html: { method: :put }) do |f| %>
         <%= devise_error_messages! %>
+          First Name
           <%= f.text_field :firstname, placeholder: "First Name", class: "form-control" %>
+          Last Name
           <%= f.text_field :lastname, placeholder: "Last Name", class: "form-control" %>
+          Email
           <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "Email Address", class: "form-control" %>
 
           <% if @minimum_password_length %>
           <em>(Password must be <%= @minimum_password_length %> characters minimum)</em>
           <% end %><br />
+          New Password
           <%= f.password_field :password, autocomplete: "new-password", placeholder: "Password", class: "form-control" %>
+          New Password (confirm)
           <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "Confirm Password", class: "form-control" %>
           <hr>
           <p> *required </p>

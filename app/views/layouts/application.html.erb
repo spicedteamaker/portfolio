@@ -38,7 +38,7 @@
             </li>
             <% if user_signed_in? %>
               <li class="nav-item">
-                <%= link_to "[Edit Password]", edit_user_registration_path, class: "nav-link" %>
+                <%= link_to "[Edit Account]", edit_user_registration_path, class: "nav-link" %>
               </li>
               <li class="nav-item">
                 <%= link_to "[Logout]", destroy_user_session_path, method: "delete", class: "nav-link" %>
@@ -52,14 +52,16 @@
         </div>
       </div>
     </div>
-    <% if current_page?(posts_path) || current_page?(root_path) %>
-      <div class="jumbotron img-fluid" style="background-image: url(<%= url_for(hero_image.variant(resize: "2240x1680")) %>)">
-        <% if user_operator_or_admin? %>
-          <div class="jumbotron-items">
-            <%= link_to "Change Header Image", header_images_new_path, class: "edit-header btn btn-md btn-secondary" %>
-          </div>
-        <% end %>
-      </div>
+    <% unless hero_image.nil? %>
+      <% if current_page?(posts_path) || current_page?(root_path) %>
+        <div class="jumbotron img-fluid" style="background-image: url(<%= url_for(hero_image.variant(resize: "2240x1680")) %>)">
+          <% if user_operator_or_admin? %>
+            <div class="jumbotron-items">
+              <%= link_to "Change Header Image", header_images_new_path, class: "edit-header btn btn-md btn-secondary" %>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
     <% end %>
   </head>
   <body>

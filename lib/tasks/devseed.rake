@@ -5,7 +5,7 @@ namespace 'db' do
     # https://stackoverflow.com/questions/876396/do-rails-rake-tasks-provide-access-to-activerecord-models
     task :dev => :environment do
 
-      ##
+      # Setup the default header image
       h = HeaderImage.new(title: "headerImage")
       h.picture.attach(io: File.open(Rails.root.join('storage/test.png')), filename: 'test.png', content_type: 'image/png')
       h.save!
