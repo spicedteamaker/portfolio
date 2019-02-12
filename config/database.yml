@@ -25,6 +25,6 @@ production:
   <<: *default
   adapter: postgresql
   encoding: unicode
-  database: <%= ENV['PGS_DB_NAME'] %>
-  username: <%= ENV['PGS_USERNAME'] %>
+  database: "portfolio_production"
+  username: "portfolio"
   password: <%= ENV['PGS_PASSWORD'] %>
