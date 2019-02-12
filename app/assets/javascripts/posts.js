@@ -1,4 +1,3 @@
-
 $(document).on('turbolinks:load', function() {
   $(function() {
     if ($('.pagination').length && $('#blog-posts').length) {
